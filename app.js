@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require('cors');
 const { execSync } = require('child_process');
 const { io } = require("socket.io-client");
 const printer = require("@thiagoelg/node-printer");
@@ -9,6 +10,7 @@ app.get('/', function(req, res, next){
 });
 
 app.use(express.json());
+app.use(cors())
 
 function getCleanValue(value){
     return value.replace(/\0.*$/g,'');

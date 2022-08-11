@@ -16,10 +16,11 @@ sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 sudo netfilter-persistent save
 sudo touch /etc/dnsmasq.conf
 sudo cp -f files/dnsmasq.conf /etc/dnsmasq.conf
-sudo rfkill unblock wlan
+sudo bash -c 'echo "country=GB" >> /etc/wpa_supplicant/wpa_supplicant.conf'
+sudo rfkill unblock all
+
 SERIALSSID=$(cat /sys/firmware/devicetree/base/serial-number | tail -c -8)
 echo "ssid=FC-$SERIALSSID" >> files/hostapd.conf
 sudo touch /etc/hostapd/hostapd.conf
 sudo cp -f files/hostapd.conf /etc/hostapd/hostapd.conf
-sudo bash -c 'echo "country=GB" >> /etc/wpa_supplicant/wpa_supplicant.conf'
 sudo systemctl reboot
