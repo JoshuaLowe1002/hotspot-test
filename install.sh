@@ -9,7 +9,6 @@ sudo touch /etc/sysctl.d/routed-ap.conf
 sudo cp -f files/routed-ap.conf /etc/sysctl.d/routed-ap.conf
 sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 sudo netfilter-persistent save
-sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 sudo touch /etc/dnsmasq.conf
 sudo cp -f files/dnsmasq.conf /etc/dnsmasq.conf
 sudo rfkill unblock wlan
