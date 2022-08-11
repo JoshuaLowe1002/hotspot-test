@@ -16,6 +16,7 @@ SERIALSSID=$(cat /sys/firmware/devicetree/base/serial-number | tail -c -8)
 echo "ssid=FC-$SERIALSSID" >> files/hostapd.conf
 sudo touch /etc/hostapd/hostapd.conf
 sudo cp -f files/hostapd.conf /etc/hostapd/hostapd.conf
+sudo echo "country=GB" >> /etc/wpa_supplicant/wpa_supplicant.conf
 curl -sL https://deb.nodesource.com/setup_18.x | sudo bash -
 sudo apt install -y nodejs
 (crontab -l 2>/dev/null; echo "@reboot node /home/fulfilmentcrowd/hotspot-test/app.js") | crontab -
