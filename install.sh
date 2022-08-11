@@ -1,8 +1,8 @@
 sudo apt update
-sudo apt install hostapd
+sudo apt install -y hostapd
 sudo systemctl unmask hostapd
 sudo systemctl enable hostapd
-sudo apt install dnsmasq
+sudo apt install -y dnsmasq
 sudo DEBIAN_FRONTEND=noninteractive apt install -y netfilter-persistent iptables-persistent
 sudo cp -f files/dhcpcd.conf /etc/dhcpcd.conf
 sudo touch /etc/sysctl.d/routed-ap.conf
@@ -16,4 +16,7 @@ SERIALSSID=$(cat /sys/firmware/devicetree/base/serial-number | tail -c -8)
 echo "ssid=FC-$SERIALSSID" >> files/hostapd.conf
 sudo touch /etc/hostapd/hostapd.conf
 sudo cp -f files/hostapd.conf /etc/hostapd/hostapd.conf
+curl -sL https://deb.nodesource.com/setup_18.x | sudo bash -
+sudo apt install -y nodejs
+(crontab -l 2>/dev/null; echo "@reboot node /home/fulfilmentcrowd/hotspot-test/app.js") | crontab -
 sudo systemctl reboot
