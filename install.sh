@@ -1,4 +1,5 @@
 sudo apt update
+sudo apt install -y libcups2-dev
 curl -sL https://deb.nodesource.com/setup_18.x | sudo bash -
 sudo apt install -y nodejs
 npm install
